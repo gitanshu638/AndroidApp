@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="iv_orderImage" type="id" />
+    <item name="iv_orderStatus" type="id" />
+    <item name="iv_offerBrand" type="id" />
+</resources>
