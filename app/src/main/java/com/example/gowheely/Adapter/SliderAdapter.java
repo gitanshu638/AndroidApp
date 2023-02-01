@@ -13,8 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.gowheely.Model.SliderModel;
 import com.example.gowheely.R;
+import com.smarteist.autoimageslider.SliderViewAdapter;
 
-public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.viewHolder>{
+public class SliderAdapter extends SliderViewAdapter<SliderAdapter.viewHolder> {
     private SliderModel[] sliderModels;
     private Context ctx;
 
@@ -26,7 +27,7 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.viewHolder
 
     @NonNull
     @Override
-    public SliderAdapter.viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public viewHolder onCreateViewHolder(@NonNull ViewGroup parent) {
         View view = LayoutInflater.from(ctx).inflate(R.layout.item_slider_layout,parent,false);
 
         return new SliderAdapter.viewHolder(view);
@@ -41,11 +42,11 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.viewHolder
     }
 
     @Override
-    public int getItemCount() {
+    public int getCount() {
         return sliderModels.length;
     }
 
-    public class viewHolder extends RecyclerView.ViewHolder {
+    public class viewHolder extends SliderViewAdapter.ViewHolder {
         private ImageView sliderImage;
         public viewHolder(@NonNull View itemView) {
             super(itemView);
