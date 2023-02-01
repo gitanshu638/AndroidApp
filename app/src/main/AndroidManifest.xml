@@ -12,6 +12,9 @@
         android:theme="@style/Theme.GoWheely"
         tools:targetApi="31">
         <activity
+            android:name=".MyOrderActivity"
+            android:exported="false" />
+        <activity
             android:name=".Home_page"
             android:exported="false" />
         <activity
