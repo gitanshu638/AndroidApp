@@ -56,7 +56,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.viewHOlder> 
 
     public class viewHOlder extends RecyclerView.ViewHolder {
         private ImageView orderImage;
-        private TextView orderStatus,orderBrand;
+        private TextView orderStatus,orderBrand, statusDate;
         public viewHOlder(@NonNull View itemView) {
             super(itemView);
             orderImage = itemView.findViewById(R.id.iv_orderImage);

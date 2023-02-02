@@ -117,11 +117,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         dealsModelList.add(new DealsModel(R.drawable.store, "Store", "Premium","3 Days","Rs 399", "Rs 499","-25%"));
-        dealsModelList.add(new DealsModel(R.drawable.store, "Store", "Premium","3 Days","Rs 399", "Rs 499","-5%"));
-        dealsModelList.add(new DealsModel(R.drawable.store, "Store", "Premium","3 Days","Rs 399", "Rs 499","-10%"));
-        dealsModelList.add(new DealsModel(R.drawable.store, "Store", "Premium","3 Days","Rs 399", "Rs 499","-15%"));
-        dealsModelList.add(new DealsModel(R.drawable.store, "Store", "Premium","3 Days","Rs 399", "Rs 499","-10%"));
-        dealsModelList.add(new DealsModel(R.drawable.store, "Store", "Premium","3 Days","Rs 399", "Rs 499","-20%"));
+        dealsModelList.add(new DealsModel(R.drawable.vegetables, "Vegetables", "Premium","3 Days","Rs 399", "Rs 499","-5%"));
+        dealsModelList.add(new DealsModel(R.drawable.fruits, "Fruits", "Premium","3 Days","Rs 399", "Rs 499","-10%"));
+        dealsModelList.add(new DealsModel(R.drawable.beverages, "Beverages", "Premium","3 Days","Rs 399", "Rs 499","-15%"));
+        dealsModelList.add(new DealsModel(R.drawable.canned, "Canned", "Premium","3 Days","Rs 399", "Rs 499","-10%"));
+        dealsModelList.add(new DealsModel(R.drawable.dairy, "Dairy", "Premium","3 Days","Rs 399", "Rs 499","-20%"));
 
 
 
