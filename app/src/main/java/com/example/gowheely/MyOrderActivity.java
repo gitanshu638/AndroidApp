@@ -34,8 +34,8 @@ public class MyOrderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_order);
         rvMyOrders=findViewById(R.id.rv_myOrders);
-        backPress=findViewById(R.id.fab_backPress);
 
+        backPress=findViewById(R.id.fab_backPress);
         appbarTitle=findViewById(R.id.txt_appbarTitle);
 
         appbarTitle.setText("My Orders");
