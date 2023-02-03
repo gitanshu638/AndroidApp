@@ -7,7 +7,7 @@
     android:layout_height="wrap_content">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:background="@color/PaleGreen"
+        android:background="@color/PaleGoldenrod"
         android:padding="10dp"
         android:layout_height="wrap_content">
 
