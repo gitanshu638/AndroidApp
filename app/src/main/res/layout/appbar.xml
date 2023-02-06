@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:elevation="3dp"
-    android:cardElevation="3dp"
     android:layout_height="wrap_content">
 
     <LinearLayout
@@ -20,11 +19,13 @@
             android:layout_marginStart="10dp"
             android:layout_marginVertical="3dp"
             app:borderWidth="0dp"
+            android:src="@drawable/back"
+
             android:outlineAmbientShadowColor="@color/White"
             android:outlineSpotShadowColor="@color/White"
             android:fabSize="mini"
             android:backgroundTint="@color/White"
-            android:src="@drawable/back"/>
+            tools:ignore="ContentDescription" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/txt_appbarTitle"
