@@ -19,13 +19,14 @@
             android:layout_marginStart="10dp"
             android:layout_marginVertical="3dp"
             app:borderWidth="0dp"
-            android:src="@drawable/back"
-
             android:outlineAmbientShadowColor="@color/White"
             android:outlineSpotShadowColor="@color/White"
-            android:fabSize="mini"
-            android:backgroundTint="@color/White"
-            tools:ignore="ContentDescription" />
+            android:src="@drawable/back"/>
+
+
+<!--            android:fabSize="mini"-->
+<!--            android:backgroundTint="@color/White"-->
+<!--            tools:ignore="ContentDescription" />-->
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/txt_appbarTitle"
