@@ -40,7 +40,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:rotation="270"
-        android:src="@drawable/down"/>
+        android:src="@drawable/baseline_keyboard_arrow_down_24"/>
 
 
 

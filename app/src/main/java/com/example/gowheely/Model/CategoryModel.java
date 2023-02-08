@@ -1,6 +1,9 @@
 package com.example.gowheely.Model;
 
 public class CategoryModel {
+    public Integer page;
+    public Integer total;
+    public Integer totalPages;
     private int categoryImage;
     private String categoryTitle;
 

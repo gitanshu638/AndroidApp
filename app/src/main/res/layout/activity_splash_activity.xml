@@ -21,7 +21,7 @@
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleLarge"
-        android:indeterminateTint="@color/DarkBlue"
+        android:indeterminateTint="@color/OrangeRed"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginBottom="50dp"
@@ -44,8 +44,8 @@
         android:layout_marginBottom="16sp"
         android:textSize="12sp"
         android:textStyle="bold"
-        android:text="POWERER BY\n Gitanshu Saxena - Accenture"
-        android:textColor="@color/MediumPurple"
+        android:text="POWERED BY\n Gitanshu Saxena and Team - Accenture"
+        android:textColor="@color/DarkRed"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -36,20 +36,21 @@
 
         <androidx.cardview.widget.CardView
             android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="5dp"
+            android:layout_marginVertical="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
             app:cardCornerRadius="3dp"
             android:elevation="3dp">
             <EditText
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Email ID"
                 android:textSize="14sp"
-                android:drawableStart="@drawable/email_dco_icon"
+                android:drawableStart="@drawable/baseline_attach_email_24"
                 android:background="@null"
-                android:padding="3dp"
+                android:padding="6dp"
                 android:drawableTint="@color/Black"
                 android:drawablePadding="7dp"
                 android:inputType="textEmailAddress"
@@ -66,6 +67,8 @@
             app:cardCornerRadius="3dp"
             android:elevation="3dp">
             <LinearLayout
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
                 android:layout_gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -77,11 +80,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="Password"
+                    android:paddingHorizontal="5dp"
                     android:inputType="textPassword"
                     android:textSize="14sp"
-                    android:drawableStart="@drawable/lock_icon"
+                    android:drawableStart="@drawable/baseline_lock_24"
                     android:background="@null"
-                    android:padding="13dp"
                     android:drawableTint="@color/Black"
                     android:drawablePadding="7dp"
                     android:singleLine="true"
@@ -90,7 +93,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/eye_icon"
+                    android:src="@drawable/baseline_remove_red_eye_24"
                     android:layout_marginEnd="10dp"/>
             </LinearLayout>
 

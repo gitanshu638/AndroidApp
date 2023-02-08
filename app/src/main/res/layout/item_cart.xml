@@ -56,7 +56,7 @@
                     android:layout_height="wrap_content"
                     android:text="Qty: 10"
                     android:background="@color/zxing_transparent"
-                    android:drawableRight="@drawable/down"
+                    android:drawableRight="@drawable/baseline_keyboard_arrow_down_24"
                     android:drawableTint="@color/Black"
                     android:layout_marginTop="5dp"
                     android:paddingHorizontal="5dp"
@@ -107,7 +107,7 @@
             android:layout_height="30dp"
             android:layout_gravity="center_vertical"
             android:layout_margin="10dp"
-            android:src="@drawable/delete_1"
+            android:src="@drawable/baseline_delete_24"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

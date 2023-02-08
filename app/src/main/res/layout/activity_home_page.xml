@@ -13,7 +13,7 @@
         android:layout_height="30dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
-        android:src="@drawable/burger"
+        android:src="@drawable/baseline_menu_24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Your Smart Shopping Journey Begins!!!"
-        android:drawableRight="@drawable/down"
+        android:drawableRight="@drawable/baseline_keyboard_arrow_down_24"
         android:drawablePadding="10dp"
         android:textColor="@color/Gray"
         android:textStyle="bold"
@@ -56,7 +56,7 @@
 
                 <EditText
                     android:paddingVertical="8dp"
-                    android:drawableLeft="@drawable/search"
+                    android:drawableLeft="@drawable/baseline_search_24"
                     android:drawablePadding="10dp"
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
