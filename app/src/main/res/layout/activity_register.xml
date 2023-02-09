@@ -30,10 +30,10 @@
         app:layout_constraintTop_toBottomOf="@+id/floatingActionButton" >
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="100dp"
             android:layout_marginBottom="30dp"
             android:src="@drawable/icon" />
 
@@ -46,7 +46,7 @@
             android:elevation="3dp">
 
             <EditText
-
+                android:id="@+id/fullName"
                 android:layout_width="380dp"
                 android:layout_height="wrap_content"
                 android:background="@null"
@@ -69,6 +69,7 @@
             android:elevation="3dp">
 
             <EditText
+                android:id="@+id/eMail"
                 android:inputType="textEmailAddress"
                 android:textSize="14sp"
                 android:drawableLeft="@drawable/baseline_attach_email_24"
@@ -91,6 +92,7 @@
             android:elevation="3dp">
 
             <EditText
+                android:id="@+id/PhoneNo"
                 android:inputType="number"
                 android:textSize="14sp"
                 android:drawableLeft="@drawable/baseline_call_24"
@@ -121,6 +123,7 @@
                 android:orientation="horizontal">
 
                 <EditText
+                    android:id="@+id/PassNew"
                     android:inputType="textPassword"
                     android:textSize="14sp"
                     android:layout_weight="1"
@@ -151,35 +154,12 @@
             android:layout_margin="5dp"
             android:elevation="3dp">
 
-            <LinearLayout
-                android:layout_gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
 
-                <EditText
-                    android:inputType="textPassword"
-                    android:textSize="14sp"
-                    android:layout_weight="1"
-                    android:drawableLeft="@drawable/baseline_lock_24"
-                    android:drawablePadding="10dp"
-                    android:layout_width="match_parent"
-                    android:padding="12dp"
-                    android:drawableTint="@color/black"
-                    android:layout_height="wrap_content"
-                    android:hint="Confirm Password"
-                    android:background="@null"/>
-
-                <ImageView
-                    android:paddingEnd="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/baseline_remove_red_eye_24"/>
-            </LinearLayout>
 
         </androidx.cardview.widget.CardView>
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingVertical="12dp"
@@ -201,6 +181,7 @@
                 android:textColor="@color/Black" />
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"

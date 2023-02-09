@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "486866018159",
+    "project_id": "gowheely-5d4dc",
+    "storage_bucket": "gowheely-5d4dc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486866018159:android:b8fa7fdb513c4c5d23529a",
+        "android_client_info": {
+          "package_name": "com.example.gowheely"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486866018159-ms9mg3drcdumgbr3t28mj047p2buvhp8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5Sp9JEv6hsJjXQfCIBd2oJobEk6XRB6M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486866018159-ms9mg3drcdumgbr3t28mj047p2buvhp8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

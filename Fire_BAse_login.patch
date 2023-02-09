@@ -1,0 +1,469 @@
+Index: app/src/main/java/com/example/gowheely/RegisterActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/gowheely/RegisterActivity.java b/app/src/main/java/com/example/gowheely/RegisterActivity.java
+--- a/app/src/main/java/com/example/gowheely/RegisterActivity.java	(revision 43d0c2d74119dbbb289bbdd59c434d104c95b159)
++++ b/app/src/main/java/com/example/gowheely/RegisterActivity.java	(date 1675925834543)
+@@ -1,14 +1,154 @@
+ package com.example.gowheely;
+ 
++import androidx.annotation.NonNull;
+ import androidx.appcompat.app.AppCompatActivity;
+ 
++import android.annotation.SuppressLint;
++import android.content.Intent;
+ import android.os.Bundle;
++import android.text.TextUtils;
++import android.util.Log;
++import android.view.View;
++import android.widget.Button;
++import android.widget.EditText;
++import android.widget.ProgressBar;
++import android.widget.TextView;
++import android.widget.Toast;
++
++import com.google.android.gms.tasks.OnCompleteListener;
++import com.google.android.gms.tasks.OnFailureListener;
++import com.google.android.gms.tasks.OnSuccessListener;
++import com.google.android.gms.tasks.Task;
++import com.google.firebase.auth.AuthResult;
++import com.google.firebase.auth.FirebaseAuth;
++import com.google.firebase.auth.FirebaseUser;
++import com.google.firebase.firestore.DocumentReference;
++import com.google.firebase.firestore.FirebaseFirestore;
++
++import java.util.HashMap;
++import java.util.Map;
+ 
+ public class RegisterActivity extends AppCompatActivity {
+ 
++    public static final String TAG = "TAG";
++    EditText mFullName, mEmail, mPassword, mPhone;
++    Button mRegisterBtn;
++    TextView mLoginBtn;
++
++    FirebaseFirestore fstore;
++    String userID;
++    FirebaseAuth fAuth;
++
++
++
++    @SuppressLint("MissingInflatedId")
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_register);
+-    }
++
++        mFullName = findViewById(R.id.fName);
++        mEmail = findViewById(R.id.Email);
++        mPassword = findViewById(R.id.password);
++        mPhone = findViewById(R.id.phone_no);
++        mRegisterBtn = findViewById(R.id.registerBtn);
++        mLoginBtn = findViewById(R.id.createText);
++
++
++        fAuth = FirebaseAuth.getInstance();
++        fstore = FirebaseFirestore.getInstance();
++
++        if (fAuth.getCurrentUser()!=null){
++            startActivity(new Intent(getApplicationContext(),LoginActivity.class));
++            finish();
++        }
++
++        mLoginBtn.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View view) {
++                startActivity(new Intent(getApplicationContext(),LoginActivity.class));
++            }
++        });
++
++        mRegisterBtn.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View view) {
++                final String email = mEmail.getText().toString().trim();
++                String password = mPassword.getText().toString().trim();
++                final String fullName = mFullName.getText().toString();
++                final String phone = mPhone.getText().toString();
++
++                if (TextUtils.isEmpty(email)) {
++                    mEmail.setError("Email is Required!!");
++                    return;
++
++                }
++
++                if (TextUtils.isEmpty(password)) {
++                    mPassword.setError("Password is Required!!");
++                    return;
++
++                }
++
++                if (password.length() < 6){
++                    mPassword.setError("Password Must Be >= 6 character");
++                    return;
++                }
++
++                fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
++                    @Override
++                    public void onComplete(@NonNull Task<AuthResult> task) {
++                        if (task.isSuccessful()){
++                            FirebaseUser fuser = fAuth.getCurrentUser();
++                            fuser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
++                                @Override
++                                public void onSuccess(Void unused) {
++                                    Toast.makeText(getApplicationContext(),"Register Successful!!", Toast.LENGTH_SHORT).show();
++                                }
++                            }).addOnFailureListener(new OnFailureListener() {
++                                @Override
++                                public void onFailure(@NonNull Exception e) {
++                                    Log.d(TAG, "Onfailure: Email Not Sent" + e.getMessage());
++                                }
++                            });
++
++
++                            Toast.makeText(getApplicationContext(), "User Created", Toast.LENGTH_SHORT).show();
++                            userID = fAuth.getCurrentUser().getUid();
++                            DocumentReference documentReference = fstore.collection("user").document(userID);
++                            Map<String,Object> user = new HashMap<>();
++                            user.put("fName",fullName);
++                            user.put("email",email);
++                            user.put("phone",phone);
++                            documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
++                                @Override
++                                public void onSuccess(Void unused) {
++                                    Log.d(TAG,"onsuccess: user profile is created for "+userID);
++                                }
++                            }).addOnFailureListener(new OnFailureListener() {
++                                @Override
++                                public void onFailure(@NonNull Exception e) {
++
++                                    Log.d(TAG,"onFailure: "+e.toString());
++
++                                }
++                            });
++
++
++                            startActivity(new Intent(getApplicationContext(),LoginActivity.class));
++
++                        }
++
++                        else {
++
++                            Toast.makeText(RegisterActivity.this, "Error" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
++
++                        }
++                    }
++                });
++            }
++        });
++
++    }
++
+ }
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_register.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_register.xml b/app/src/main/res/layout/activity_register.xml
+--- a/app/src/main/res/layout/activity_register.xml	(revision 43d0c2d74119dbbb289bbdd59c434d104c95b159)
++++ b/app/src/main/res/layout/activity_register.xml	(date 1675916231033)
+@@ -30,10 +30,10 @@
+         app:layout_constraintTop_toBottomOf="@+id/floatingActionButton" >
+ 
+         <de.hdodenhof.circleimageview.CircleImageView
+-            android:layout_width="80dp"
+-            android:layout_height="80dp"
++            android:layout_width="100dp"
++            android:layout_height="100dp"
+             android:layout_gravity="center"
+-            android:layout_marginTop="30dp"
++            android:layout_marginTop="100dp"
+             android:layout_marginBottom="30dp"
+             android:src="@drawable/icon" />
+ 
+@@ -46,7 +46,7 @@
+             android:elevation="3dp">
+ 
+             <EditText
+-
++                android:id="@+id/fName"
+                 android:layout_width="380dp"
+                 android:layout_height="wrap_content"
+                 android:background="@null"
+@@ -69,6 +69,7 @@
+             android:elevation="3dp">
+ 
+             <EditText
++                android:id="@+id/Email"
+                 android:inputType="textEmailAddress"
+                 android:textSize="14sp"
+                 android:drawableLeft="@drawable/baseline_attach_email_24"
+@@ -91,6 +92,7 @@
+             android:elevation="3dp">
+ 
+             <EditText
++                android:id="@+id/phone_no"
+                 android:inputType="number"
+                 android:textSize="14sp"
+                 android:drawableLeft="@drawable/baseline_call_24"
+@@ -121,6 +123,7 @@
+                 android:orientation="horizontal">
+ 
+                 <EditText
++                    android:id="@+id/password"
+                     android:inputType="textPassword"
+                     android:textSize="14sp"
+                     android:layout_weight="1"
+@@ -151,35 +154,11 @@
+             android:layout_margin="5dp"
+             android:elevation="3dp">
+ 
+-            <LinearLayout
+-                android:layout_gravity="center"
+-                android:layout_width="match_parent"
+-                android:layout_height="wrap_content"
+-                android:orientation="horizontal">
+-
+-                <EditText
+-                    android:inputType="textPassword"
+-                    android:textSize="14sp"
+-                    android:layout_weight="1"
+-                    android:drawableLeft="@drawable/baseline_lock_24"
+-                    android:drawablePadding="10dp"
+-                    android:layout_width="match_parent"
+-                    android:padding="12dp"
+-                    android:drawableTint="@color/black"
+-                    android:layout_height="wrap_content"
+-                    android:hint="Confirm Password"
+-                    android:background="@null"/>
+-
+-                <ImageView
+-                    android:paddingEnd="10dp"
+-                    android:layout_width="wrap_content"
+-                    android:layout_height="match_parent"
+-                    android:src="@drawable/baseline_remove_red_eye_24"/>
+-            </LinearLayout>
+ 
+         </androidx.cardview.widget.CardView>
+ 
+         <com.google.android.material.button.MaterialButton
++            android:id="@+id/registerBtn"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:paddingVertical="12dp"
+@@ -201,6 +180,7 @@
+                 android:textColor="@color/Black" />
+ 
+             <com.google.android.material.textview.MaterialTextView
++                android:id="@+id/createText"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginStart="5dp"
+Index: app/src/main/java/com/example/gowheely/LoginActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/gowheely/LoginActivity.java b/app/src/main/java/com/example/gowheely/LoginActivity.java
+--- a/app/src/main/java/com/example/gowheely/LoginActivity.java	(revision 43d0c2d74119dbbb289bbdd59c434d104c95b159)
++++ b/app/src/main/java/com/example/gowheely/LoginActivity.java	(date 1675914091092)
+@@ -1,14 +1,90 @@
+ package com.example.gowheely;
+ 
++import androidx.annotation.NonNull;
+ import androidx.appcompat.app.AppCompatActivity;
+ 
++import android.content.Intent;
+ import android.os.Bundle;
++import android.text.TextUtils;
++import android.view.View;
++import android.widget.Button;
++import android.widget.EditText;
++import android.widget.TextView;
++import android.widget.Toast;
++import com.google.firebase.auth.AuthResult;
++import com.google.firebase.auth.FirebaseAuth;
++
++import com.google.android.gms.tasks.OnCompleteListener;
++import com.google.android.gms.tasks.Task;
+ 
+ public class LoginActivity extends AppCompatActivity {
+ 
++    EditText mEmail,mPassword;
++    Button mLoginBtn;
++
++    TextView mCreateBtn;
++    FirebaseAuth fAuth;
++
++
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_login);
++
++        mEmail = findViewById(R.id.email_id);
++        mPassword = findViewById(R.id.pass);
++        mLoginBtn = findViewById(R.id.login_btn);
++
++        mCreateBtn.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View view) {
++                startActivity(new Intent(getApplicationContext(),RegisterActivity.class));
++            }
++        });
++
++
++        mLoginBtn.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View view) {
++                String email = mEmail.getText().toString().trim();
++                String password = mPassword.getText().toString().trim();
++
++                if (TextUtils.isEmpty(email)) {
++                    mEmail.setError("Email is Required!!");
++                    return;
++                }
++
++                if (TextUtils.isEmpty(password)) {
++                    mPassword.setError("Password is Required!!");
++                    return;
++                }
++
++
++                if (password.length() < 6) {
++                    mPassword.setError("Password must be >=6 character");
++                    return;
++                }
++
++                fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
++                    @Override
++                    public void onComplete(@NonNull Task<AuthResult> task) {
++                        if (task.isSuccessful())
++                        {
++                            Toast.makeText(getApplicationContext(), "Log In Successful", Toast.LENGTH_SHORT).show();
++                            startActivity(new Intent(getApplicationContext(),CheckoutActivity.class));
++                        }
++
++                        else {
++
++                            Toast.makeText(getApplicationContext(), "Error!:("+ task.getException().getMessage(),Toast.LENGTH_SHORT).show();
++                        }
++                    }
++                });
++
++
++            }
++        });
+     }
+-}
+\ No newline at end of file
++
++}
++
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/build.gradle b/app/build.gradle
+--- a/app/build.gradle	(revision 43d0c2d74119dbbb289bbdd59c434d104c95b159)
++++ b/app/build.gradle	(date 1675915947979)
+@@ -1,6 +1,7 @@
+ 
+ plugins {
+     id 'com.android.application'
++    id 'com.google.gms.google-services'
+ }
+ 
+ android {
+@@ -35,6 +36,9 @@
+     implementation 'com.google.android.material:material:1.8.0'
+     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+     implementation 'androidx.appcompat:appcompat:1.7.0-alpha01'
++    implementation 'com.google.firebase:firebase-auth:21.1.0'
++    implementation 'com.google.firebase:firebase-firestore:24.4.2'
++    implementation 'com.google.firebase:firebase-storage:20.1.0'
+     testImplementation 'junit:junit:4.13.2'
+     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+@@ -54,4 +58,6 @@
+     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
+ //    implementation 'com.squareup.okhttp3:okhttps:4.10.0'
+     implementation 'com.razorpay:checkout:1.6.27'
++    implementation 'com.google.gms:google-services:4.3.14'
++
+ }
+Index: build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/build.gradle b/build.gradle
+--- a/build.gradle	(revision 43d0c2d74119dbbb289bbdd59c434d104c95b159)
++++ b/build.gradle	(date 1675912333222)
+@@ -1,4 +1,8 @@
+-// Top-level build file where you can add configuration options common to all sub-projects/modules.
++buildscript {
++    dependencies {
++        classpath 'com.google.gms:google-services:4.3.10'
++    }
++}// Top-level build file where you can add configuration options common to all sub-projects/modules.
+ plugins {
+     id 'com.android.application' version '7.4.0' apply false
+     id 'com.android.library' version '7.4.0' apply false
+Index: app/src/main/res/layout/activity_login.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_login.xml b/app/src/main/res/layout/activity_login.xml
+--- a/app/src/main/res/layout/activity_login.xml	(revision 43d0c2d74119dbbb289bbdd59c434d104c95b159)
++++ b/app/src/main/res/layout/activity_login.xml	(date 1675871135372)
+@@ -42,8 +42,9 @@
+ 
+             app:cardCornerRadius="3dp"
+             android:elevation="3dp">
++
+             <EditText
+-
++                android:id="@+id/email_id"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:hint="Email ID"
+@@ -75,6 +76,7 @@
+                 android:orientation="horizontal">
+ 
+                 <EditText
++                    android:id="@+id/pass"
+                     android:layout_weight="1"
+                     android:width="0dp"
+                     android:layout_width="match_parent"
+@@ -109,6 +111,7 @@
+             android:layout_gravity="end"/>
+ 
+         <com.google.android.material.button.MaterialButton
++            android:id="@+id/login_btn"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginHorizontal="20dp"
+Index: app/src/main/java/com/example/gowheely/SplashActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/gowheely/SplashActivity.java b/app/src/main/java/com/example/gowheely/SplashActivity.java
+--- a/app/src/main/java/com/example/gowheely/SplashActivity.java	(revision 43d0c2d74119dbbb289bbdd59c434d104c95b159)
++++ b/app/src/main/java/com/example/gowheely/SplashActivity.java	(date 1675870484796)
+@@ -23,7 +23,7 @@
+         new Handler().postDelayed(new Runnable() {
+             @Override
+             public void run() {
+-                startActivity(new Intent(SplashActivity.this,CheckoutActivity.class));
++                startActivity(new Intent(SplashActivity.this,LoginActivity.class));
+                 finish();
+             }
+         },2500);
