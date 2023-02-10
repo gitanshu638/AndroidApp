@@ -21,6 +21,8 @@ import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
 
 public class BarCodeScannerActivity extends AppCompatActivity {
+    Button cartDetails;
+
 
     private final ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(new ScanContract(),
             result -> {
@@ -36,7 +38,7 @@ public class BarCodeScannerActivity extends AppCompatActivity {
                 } else {
                     Log.d("barcode", "Scanned");
                     Intent intent = new Intent(this, CartActivity.class);
-                    intent.putExtra("scannedData",result.getContents());
+                    intent.putExtra("UUID",result.getContents());
                     startActivity(intent);
                    // Toast.makeText(BarCodeScannerActivity.this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
                 }
@@ -47,11 +49,16 @@ public class BarCodeScannerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bar_code_scanner);
+
     }
+
+
 
     public void scanBarcode(View view) {
         barcodeLauncher.launch(new ScanOptions());
     }
+
+
 
 
 
