@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.gowheely.scanner.BarCodeScannerActivity;
+
 
 public class LoginActivity extends AppCompatActivity {
     EditText mEmail,mPassword;
@@ -48,9 +50,9 @@ public class LoginActivity extends AppCompatActivity {
         String email = mEmail.getText().toString().trim();
         String pass = mPassword.getText().toString().trim();
 
-        if(email.equals("abc@gmail.com") && pass.equals("12345")){
+        if(email.equals("gitanshusaxena07@gmail.com") && pass.equals("12345")){
             Toast.makeText(this, "Email & Password Matched", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this,CheckoutActivity.class));
+            startActivity(new Intent(this, LandingActivity.class));
         }
         else {
             Toast.makeText(this, "Email & Password not Matched", Toast.LENGTH_SHORT).show();
