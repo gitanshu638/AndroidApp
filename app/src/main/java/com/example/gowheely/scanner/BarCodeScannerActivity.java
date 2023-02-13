@@ -38,9 +38,9 @@ public class BarCodeScannerActivity extends AppCompatActivity {
                 } else {
                     Log.d("barcode", "Scanned");
                     Intent intent = new Intent(this, CartActivity.class);
-                    intent.putExtra("UUID",result.getContents());
+                    intent.putExtra("UUID", result.getContents());
                     startActivity(intent);
-                   // Toast.makeText(BarCodeScannerActivity.this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+                    // Toast.makeText(BarCodeScannerActivity.this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
                 }
             });
 
@@ -53,42 +53,9 @@ public class BarCodeScannerActivity extends AppCompatActivity {
     }
 
 
-
     public void scanBarcode(View view) {
         barcodeLauncher.launch(new ScanOptions());
     }
 
 
-
-
-
-    /**
-     * Sample of scanning from a Fragment
-     */
-//    public static class ScanFragment extends Fragment {
-//        private final ActivityResultLauncher<ScanOptions> fragmentLauncher = registerForActivityResult(new ScanContract(),
-//                result -> {
-//                    if (result.getContents() == null) {
-//                        Toast.makeText(getContext(), "Cancelled from fragment", Toast.LENGTH_LONG).show();
-//                    } else {
-//                        Toast.makeText(getContext(), "Scanned from fragment: " + result.getContents(), Toast.LENGTH_LONG).show();
-//                    }
-//                });
-//
-//        public ScanFragment() {
-//        }
-//
-//        @Override
-//        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                                 Bundle savedInstanceState) {
-//            View view = inflater.inflate(R.layout.fragment_scan, container, false);
-//            @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button scan = view.findViewById(R.id.scan_from_fragment);
-//            scan.setOnClickListener(v -> scanFromFragment());
-//            return view;
-//        }
-//
-//        public void scanFromFragment() {
-//            fragmentLauncher.launch(new ScanOptions());
-//        }
-//    }
 }

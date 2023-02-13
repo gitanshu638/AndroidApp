@@ -45,7 +45,7 @@
             <EditText
                 android:id="@+id/Email"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="70dp"
                 android:hint="Email ID"
                 android:textSize="14sp"
                 android:drawableStart="@drawable/baseline_attach_email_24"
@@ -79,7 +79,7 @@
                     android:layout_weight="1"
                     android:width="0dp"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="70dp"
                     android:hint="Password"
                     android:paddingHorizontal="5dp"
                     android:inputType="textPassword"
