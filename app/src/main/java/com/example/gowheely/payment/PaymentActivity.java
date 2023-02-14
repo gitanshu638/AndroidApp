@@ -21,6 +21,7 @@ import org.json.JSONObject;
 public class PaymentActivity extends AppCompatActivity implements PaymentResultWithDataListener {
 
     private Button buttonConfirmOrder;
+    String price;
     private EditText editTextPayment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,8 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultW
         findViews();
         listeners();
 
+        price = getIntent().getStringExtra("Price");
+        editTextPayment.setText(price);
 
     }
     public void findViews() {

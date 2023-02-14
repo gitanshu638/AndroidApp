@@ -90,9 +90,23 @@
                 android:id="@+id/data_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/no_data"
+                android:text="Receiving data"
                 android:textSize="18sp" />
         </LinearLayout>
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="20dp"
+            android:text=" Total Price  =            140Rs"/>
+        <Button
+            android:id="@+id/payNow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pay Now"/>
 
         <ExpandableListView
             android:id="@+id/gatt_services_list"

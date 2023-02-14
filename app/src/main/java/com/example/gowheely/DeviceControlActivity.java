@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
@@ -45,8 +46,12 @@ public class DeviceControlActivity extends AppCompatActivity {
 
     private TextView mConnectionState;
     private TextView mDataField;
+
+    private TextView mPrice;
     private String mDeviceName;
     private String mDeviceAddress;
+
+    Button mPaynow;
     private ExpandableListView mGattServicesList;
     private BluetoothLEService mBluetoothLeService;
     private ArrayList<ArrayList<BluetoothGattCharacteristic>> mGattCharacteristics =
@@ -165,12 +170,23 @@ public class DeviceControlActivity extends AppCompatActivity {
         mGattServicesList.setOnChildClickListener(servicesListClickListner);
         mConnectionState = (TextView) findViewById(R.id.connection_state);
         mDataField = (TextView) findViewById(R.id.data_value);
+        mPaynow = (Button) findViewById(R.id.payNow);
+
+
 
         getSupportActionBar().setTitle("Cart_Info");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent gattServiceIntent = new Intent(this, BluetoothLEService.class);
         bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
+
+        mPaynow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DeviceControlActivity.this, CheckoutActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
