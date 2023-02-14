@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GoWheely</string>
+    <string name="app_name">HopSkipp</string>
     <string name="how_it_works">how it works</string>
     <string name="How_it_works">How it works:</string>
     <string name="ble_not_supported">BLE is not supported</string>

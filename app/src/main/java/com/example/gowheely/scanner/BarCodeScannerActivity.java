@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.gowheely.CartActivity;
+import com.example.gowheely.DeviceControlActivity;
 import com.example.gowheely.R;
 import com.google.zxing.client.android.Intents;
 import com.journeyapps.barcodescanner.ScanContract;
@@ -40,6 +41,7 @@ public class BarCodeScannerActivity extends AppCompatActivity {
                     Intent intent = new Intent(this, CartActivity.class);
                     intent.putExtra("UUID", result.getContents());
                     startActivity(intent);
+                    finish();
                     // Toast.makeText(BarCodeScannerActivity.this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
                 }
             });

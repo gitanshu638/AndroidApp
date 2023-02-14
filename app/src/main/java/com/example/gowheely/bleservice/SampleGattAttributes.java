@@ -15,11 +15,12 @@ public class SampleGattAttributes {
     static {
       //  attributes.put(UUID_BATTERY_LEVEL_UUID, "Battery Level");
        // attributes.put(UUID_BATTERY_SERVICE, "Battery Service");
-        attributes.put(UUID_CART_INFO_SERVICE,"CART_INFO");
+        attributes.put(UUID_CART_INFO_SERVICE,"Cart_Info");
     }
 
-    public static String lookup(String uuid) {
+
+    public static String lookup(String uuid, String defaultName) {
         String name = attributes.get(uuid);
-        return name;
+        return name == null ? defaultName : name;
     }
 }

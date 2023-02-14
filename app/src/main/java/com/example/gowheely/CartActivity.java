@@ -112,13 +112,13 @@ public class CartActivity extends AppCompatActivity {
         find = (Button) findViewById(R.id.Find);
         statusTv = (TextView) findViewById(R.id.status);
         listView = (ListView) findViewById(R.id.listView1);
-        connect = (Button) findViewById(R.id.connect);
-        connect_ser = (Button) findViewById(R.id.connect_service);
+     //   connect = (Button) findViewById(R.id.connect);
+      //  connect_ser = (Button) findViewById(R.id.connect_service);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         //get uuid from scan
         uuid = getIntent().getStringExtra("UUID");
-        statusTv.setText(uuid);
+        statusTv.setText("List of Devices");
 
         bluetoothAdapter = BluetoothAdapter.
                 getDefaultAdapter();
@@ -153,17 +153,8 @@ public class CartActivity extends AppCompatActivity {
             @SuppressLint("MissingPermission")
             @Override
             public void onClick(View arg0) {
-//                if (!bluetoothAdapter.isDiscovering()) {
-//                    Context context = getApplicationContext();
-//                    CharSequence text = "MAKING YOUR DEVICE DISCOVERABLE";
-//                    int duration = Toast.LENGTH_SHORT;
-//                    Toast toast = Toast.makeText(context, text, duration);
-//                    toast.show();
-                //  Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
-                //  startActivityForResult(enableBtIntent, REQUEST_DISCOVERABLE_BT);
-                // (new Thread(new workerThread("turn_on"))).start();
+
                 startScanning(true);
-                //  }
             }
         });
         turnOff.setOnClickListener(new View.OnClickListener() {
@@ -212,31 +203,31 @@ public class CartActivity extends AppCompatActivity {
         });
 
 
-        connect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (bluetoothDevice != null) {
-                    progressBar.setVisibility(View.VISIBLE);
-                    Intent gattServiceIntent = new Intent(CartActivity.this, BluetoothLEService.class);
-                    bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
-                }
-            }
-        });
-
-        connect_ser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mNotifyCharacteristic != null) {
-                    final int charaProp = mNotifyCharacteristic.getProperties();
-                    if ((charaProp | BluetoothGattCharacteristic.PROPERTY_READ) > 0) {
-                        mBluetoothLEService.readCharacteristic(mNotifyCharacteristic);
-                    }
-                    if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
-                        mBluetoothLEService.setCharacteristicNotification(mNotifyCharacteristic, true);
-                    }
-                }
-            }
-        });
+//        connect.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (bluetoothDevice != null) {
+//                    progressBar.setVisibility(View.VISIBLE);
+//                    Intent gattServiceIntent = new Intent(CartActivity.this, BluetoothLEService.class);
+//                    bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
+//                }
+//            }
+//        });
+//
+//        connect_ser.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (mNotifyCharacteristic != null) {
+//                    final int charaProp = mNotifyCharacteristic.getProperties();
+//                    if ((charaProp | BluetoothGattCharacteristic.PROPERTY_READ) > 0) {
+//                        mBluetoothLEService.readCharacteristic(mNotifyCharacteristic);
+//                    }
+//                    if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
+//                        mBluetoothLEService.setCharacteristicNotification(mNotifyCharacteristic, true);
+//                    }
+//                }
+//            }
+//        });
 
 
         // create the arrayAdapter that contains the BTDevices, and set it to the ListView
@@ -385,7 +376,7 @@ public class CartActivity extends AppCompatActivity {
 
             uuid = gattService.getUuid().toString();
 
-            serviceString = SampleGattAttributes.lookup(uuid);
+            serviceString = SampleGattAttributes.lookup(uuid, serviceString);
 
             if (serviceString != null) {
                 List<BluetoothGattCharacteristic> gattCharacteristics =
@@ -394,7 +385,7 @@ public class CartActivity extends AppCompatActivity {
                 for (BluetoothGattCharacteristic gattCharacteristic : gattCharacteristics) {
                     HashMap<String, String> currentCharaData = new HashMap<String, String>();
                     uuid = gattCharacteristic.getUuid().toString();
-                    charaString = SampleGattAttributes.lookup(uuid);
+                    charaString = SampleGattAttributes.lookup(uuid, charaString);
                     if (charaString != null) {
                         statusTv.setText(charaString);
                     }

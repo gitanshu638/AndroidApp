@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -194,6 +195,7 @@ public class BluetoothLEService extends Service {
     public void disconnect() {
         if (mBluetoothAdapter == null || mBluetoothGatt == null) {
             Log.d(TAG, "Bluetooth adapter not initialize");
+            Toast.makeText(this,"Bluetooth adapter not initialize",Toast.LENGTH_LONG).show();
             return;
         }
         mBluetoothGatt.disconnect();
@@ -220,10 +222,11 @@ public class BluetoothLEService extends Service {
         final BluetoothDevice bluetoothDevice = mBluetoothAdapter.getRemoteDevice(address);
         if (bluetoothDevice == null) {
             Log.w(TAG, "Device not found");
+            Toast.makeText(this,"device not found",Toast.LENGTH_LONG).show();
             return false;
         }
 
-        mBluetoothGatt = bluetoothDevice.connectGatt(this, false, bluetoothGattCallback);
+        mBluetoothGatt = bluetoothDevice.connectGatt(this, false, bluetoothGattCallback,BluetoothDevice.TRANSPORT_LE);
         bluetoothAddress = address;
         mConnectionState = STATE_CONNECTING;
         return true;
