@@ -99,7 +99,7 @@ public class CartActivity extends AppCompatActivity {
     BroadcastReceiver bReceiver, getmGattUpdateReceiver;
 
 
-    @SuppressLint("MissingPermission")
+    @SuppressLint({"MissingPermission", "MissingInflatedId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -183,7 +183,13 @@ public class CartActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                list(view);
+                // list(view);
+                String selectedItem = (String) parent.getItemAtPosition(position);
+                Toast.makeText(CartActivity.this, selectedItem, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(CartActivity.this, DeviceControlActivity.class);
+                intent.putExtra(DeviceControlActivity.EXTRAS_DEVICE_NAME, selectedItem);
+                intent.putExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS, selectedItem);
+                startActivity(intent);
             }
 
         });
@@ -532,7 +538,7 @@ public class CartActivity extends AppCompatActivity {
             // add the name and the MAC address of the object to the arrayAdapter
             BTArrayAdapter.add(bluetoothDevice.getName() + "\n" + bluetoothDevice.getAddress());
             BTArrayAdapter.notifyDataSetChanged();
-            Toast.makeText(CartActivity.this, "device added in list", Toast.LENGTH_LONG).show();
+            // Toast.makeText(CartActivity.this, "device added in list", Toast.LENGTH_LONG).show();
             progressBar.setVisibility(View.INVISIBLE);
         }
 

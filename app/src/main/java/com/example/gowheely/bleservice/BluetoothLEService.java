@@ -216,6 +216,7 @@ public class BluetoothLEService extends Service {
                 return false;
             }
         }
+        assert mBluetoothAdapter != null;
         final BluetoothDevice bluetoothDevice = mBluetoothAdapter.getRemoteDevice(address);
         if (bluetoothDevice == null) {
             Log.w(TAG, "Device not found");
