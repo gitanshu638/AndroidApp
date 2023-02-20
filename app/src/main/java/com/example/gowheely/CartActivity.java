@@ -1,5 +1,7 @@
 package com.example.gowheely;
 
+import static android.Manifest.permission.BLUETOOTH_CONNECT;
+
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -18,6 +20,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -32,6 +35,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -112,8 +116,8 @@ public class CartActivity extends AppCompatActivity {
         find = (Button) findViewById(R.id.Find);
         statusTv = (TextView) findViewById(R.id.status);
         listView = (ListView) findViewById(R.id.listView1);
-     //   connect = (Button) findViewById(R.id.connect);
-      //  connect_ser = (Button) findViewById(R.id.connect_service);
+        //   connect = (Button) findViewById(R.id.connect);
+        //  connect_ser = (Button) findViewById(R.id.connect_service);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         //get uuid from scan
@@ -287,12 +291,20 @@ public class CartActivity extends AppCompatActivity {
             Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(intent, Constants.REQUEST_BLUETOOTH_ENABLE_CODE);
         }
+
+        if (ContextCompat.checkSelfPermission(CartActivity.this, BLUETOOTH_CONNECT) == PackageManager.PERMISSION_DENIED) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                ActivityCompat.requestPermissions(CartActivity.this, new String[]{BLUETOOTH_CONNECT}, 2);
+                return;
+            }
+        }
         registerReceiver(mGattUpdateReceiver, GattUpdateIntentFilter());
         if (mBluetoothLEService != null) {
             final boolean result = mBluetoothLEService.connect(bluetoothDevice.getAddress());
             Log.d("BluetoothGatt", "Connect request result=" + result);
         }
     }
+
 
     @Override
     protected void onPause() {
